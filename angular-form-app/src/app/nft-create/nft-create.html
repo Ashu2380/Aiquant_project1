@@ -1,0 +1,45 @@
+<div class="nft-create-container">
+  <div class="nft-card">
+    <div class="card-header">
+      <h2>Create & Mint Your NFT</h2>
+      <p>Fill in the details below to mint your unique NFT on Ethereum</p>
+    </div>
+    <div class="card-body">
+      <form class="nft-form" (ngSubmit)="mintNFT()">
+        <div class="form-group">
+          <label for="nftName">NFT Name</label>
+          <input type="text" id="nftName" [(ngModel)]="nftName" name="nftName" placeholder="Enter NFT name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nftDescription">Description</label>
+          <textarea id="nftDescription" [(ngModel)]="nftDescription" name="nftDescription" placeholder="Describe your NFT" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="nftImage">Image URL</label>
+          <input type="url" id="nftImage" [(ngModel)]="nftImage" name="nftImage" placeholder="https://example.com/image.png" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nftAttributes">Attributes (Optional)</label>
+          <input type="text" id="nftAttributes" [(ngModel)]="nftAttributes" name="nftAttributes" placeholder="e.g., Background: Blue, Eyes: Green">
+        </div>
+
+        <button type="submit" class="mint-btn" [disabled]="isMinting">
+          <span *ngIf="!isMinting">Mint NFT</span>
+          <span *ngIf="isMinting">Minting...</span>
+        </button>
+      </form>
+
+      <div class="status" *ngIf="txHash">
+        <h3>Success!</h3>
+        <p>Transaction Hash: <a [href]="'https://etherscan.io/tx/' + txHash" target="_blank">{{ txHash }}</a></p>
+      </div>
+
+      <div class="error" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div>
